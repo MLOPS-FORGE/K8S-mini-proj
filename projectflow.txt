@@ -407,6 +407,7 @@ kubectl apply -f deployment.yaml
 ```
 
 To delete the deployment (if needed):
+# this deletes the deployment but not the docker image.
 ```bash
 kubectl delete deployment kubernetes-test-app
 ```
@@ -416,6 +417,7 @@ kubectl delete deployment kubernetes-test-app
 ### **10. Test the Application**
 
 1. Check Pods and Nodes:
+# deployment would have happened inside some pod only.
    ```bash
    kubectl get pods -A
    kubectl get nodes -A
@@ -427,6 +429,7 @@ kubectl delete deployment kubernetes-test-app
    ```
 
 3. Access the application service:
+#after deployment if i wanna use the application, write this command.
    ```bash
    minikube service kubernetes-test-app
    ```
