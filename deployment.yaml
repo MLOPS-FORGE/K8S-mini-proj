@@ -1,8 +1,8 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Deployment  #it has to be deployment only
 metadata:
   name: kubernetes-test-app
-spec:
+spec: #specification while deploying the app
   replicas: 2  # Number of pods
   selector:
     matchLabels:
@@ -14,18 +14,18 @@ spec:
     spec:
       containers:
       - name: kubernetes-test-app
-        image: kubernetes-test-app:latest
-        imagePullPolicy: Never  # Tell Kubernetes not to pull from a registry
-        # image: vikash95/kubernetes-test-app:latest
-        resources:
+        image: kubernetes-test-app:latest  #here docker image name, also mention the tag
+        imagePullPolicy: Never  # Tell Kubernetes not to pull from a registry #delete this line if you want the image to be pulled from remote repo, else keep it - it will look for image localyy
+        # image: vikash95/kubernetes-test-app:latest  --- here define wherever your image is defined. either in ecr or dockerhub -- give the link of the image.
+        resources: #resources for my nodes
           limits:
-            memory: "64Mi"
-            cpu: "200m"
+            memory: "64Mi" #64mb
+            cpu: "200m" #200 milicore: ie. 1/5th of 1 core.
         ports:
         - containerPort: 5000
 ---
 apiVersion: v1
-kind: Service
+kind: Service #service file
 metadata:
   name: kubernetes-test-app
 spec:
@@ -33,4 +33,4 @@ spec:
     app: kubernetes-test-app
   ports:
   - port: 8080
-    targetPort: 5000
+    targetPort: 5000 #targetport is the containerport
